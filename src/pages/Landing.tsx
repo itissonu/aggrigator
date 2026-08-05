@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Shield, Car, Leaf, BarChart3, Zap, ArrowRight, Clock, FileText, Target, CheckCircle2, MessageSquare } from 'lucide-react';
+import { Shield, Car, Leaf, BarChart3, Zap, ArrowRight, Clock, FileText, Target, CheckCircle2, MessageSquare, Phone, Mail, MapPin, ChevronUp } from 'lucide-react';
 import { getDaysTo2030 } from '@/lib/mockData';
 import heroBg from '@/assets/hero-delhi-ev.jpg';
+import heroDelAgg from '@/assets/hero-del-agg.png';
 import collageBg from '@/assets/delhi_fleet_ev_collage.png';
-import { FAQIllustration } from '@/components/illustrations/FAQIllustration';
+import delhiEvVector from '@/assets/delhi_ev_vector_illustration.png';
 
 function AnimatedCounter({ end, suffix = "", prefix = "" }: { end: number, suffix?: string, prefix?: string }) {
   const [count, setCount] = useState(0);
@@ -73,7 +74,7 @@ export default function Landing() {
     const handleScroll = () => {
       if (heroRef.current) {
         const scrollY = window.scrollY;
-        heroRef.current.style.transform = `translateY(${scrollY * 0.4}px) scale(1.1)`;
+        heroRef.current.style.transform = `translateY(${scrollY * 0.2}px) scale(1.05)`;
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -86,58 +87,80 @@ export default function Landing() {
       <header className="border-b border-border bg-card/80 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-              <Zap className="w-5 h-5 text-primary-foreground" />
+            <div className="w-9 h-9 rounded-lg bg-[#0d5c3a] flex items-center justify-center shadow-sm">
+              <Zap className="w-5 h-5 text-white" />
             </div>
             <div>
-              <p className="font-heading font-bold text-sm">GACP</p>
+              <p className="font-heading font-bold text-sm leading-tight text-slate-900">GACP</p>
               <p className="text-[10px] text-muted-foreground leading-tight">Government Aggregator Compliance Portal</p>
             </div>
           </div>
+
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+            <a href="#scheme" className="hover:text-[#0d5c3a] transition-colors">Scheme</a>
+            <a href="#how-it-works" className="hover:text-[#0d5c3a] transition-colors">How it works</a>
+            <a href="#ev-targets" className="hover:text-[#0d5c3a] transition-colors">EV Targets</a>
+            <a href="#faq" className="hover:text-[#0d5c3a] transition-colors">FAQ</a>
+          </div>
+
           <div className="flex items-center gap-3">
             <Link to="/login">
-              <Button variant="ghost" size="sm">Sign In</Button>
+              <Button variant="ghost" size="sm" className="text-slate-700 font-semibold hover:bg-slate-100">Sign in</Button>
             </Link>
             <Link to="/register">
-              <Button variant="accent" size="sm">Apply for License</Button>
+              <Button className="bg-[#10a352] hover:bg-[#0d8743] text-white font-semibold text-xs sm:text-sm px-4 py-2 rounded-lg shadow-sm">Apply for License</Button>
             </Link>
           </div>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img ref={heroRef} src={heroBg} alt="Delhi EV infrastructure" width={1920} height={1080} className="w-full h-full object-cover scale-110 will-change-transform" />
-          <div className="absolute inset-0 bg-primary/80 backdrop-blur-sm" />
+      <section className="relative overflow-hidden bg-[#9ac9df] h-[calc(100vh-4rem)] min-h-[600px] flex flex-col pt-8 sm:pt-12">
+        {/* Absolute Background Image (Stretches Full Width) */}
+        <div className="absolute inset-0 pointer-events-none">
+          <img
+            ref={heroRef}
+            src={heroDelAgg}
+            alt="Delhi Aggregator Portal"
+            className="w-full h-full object-cover object-bottom will-change-transform"
+          />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-6">
-              <Leaf className="w-3.5 h-3.5" />
-              Transport Department · Govt of NCT of Delhi
-            </div>
-            <h1 className="font-heading text-4xl md:text-6xl font-extrabold leading-tight tracking-tight text-primary-foreground">
-              Driving Delhi's
-              <span className="text-accent"> Electric</span>
-              <br />Future Forward
-            </h1>
-            <p className="mt-5 text-lg text-primary-foreground/70 max-w-xl leading-relaxed">
-              The unified compliance platform for ride-hailing aggregators. Track EV adoption targets,
-              manage fleet registrations, and ensure regulatory compliance — all in one portal.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/register">
-                <Button variant="accent" size="lg" className="gap-2">
-                  Apply for License <ArrowRight className="w-4 h-4" />
-                </Button>
-              </Link>
-              <Link to="/login">
-                <Button variant="outline" size="lg">Track Compliance</Button>
-              </Link>
-            </div>
+
+        {/* Content Overlay */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center flex-shrink-0">
+          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#0d5c3a]/20 text-[#0d5c3a] text-[11px] sm:text-xs font-bold tracking-wide shadow-sm mb-4">
+            <CheckCircle2 className="w-4 h-4 text-[#0d5c3a]" />
+            <span>TRANSPORT DEPARTMENT · GOVT OF NCT OF DELHI</span>
+          </div>
+
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#0d5c3a] max-w-4xl leading-[1.1]">
+            Welcome to the
+            <br />
+            Delhi Aggregator Portal
+          </h1>
+
+          <p className="mt-4 text-[11px] sm:text-xs md:text-sm text-slate-800 max-w-lg mx-auto leading-relaxed font-heading font-medium">
+            The unified compliance platform for ride-hailing aggregators, delivery
+            service providers and e-commerce fleets — licensing, fleet registration and
+            EV targets in one place.
+          </p>
+
+          <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-4">
+            <Link to="/register">
+              <Button className="bg-[#0d5c3a] hover:bg-[#09472d] text-white px-6 py-3 rounded-xl font-bold shadow-md gap-2 h-auto text-sm sm:text-base transition-all">
+                Apply for License <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </Button>
+            </Link>
+            <Link to="/login">
+              <Button variant="outline" className="bg-white hover:bg-slate-50 text-[#0d5c3a] border-slate-300 px-6 py-3 rounded-xl font-bold shadow-sm h-auto text-sm sm:text-base transition-all">
+                Track Compliance
+              </Button>
+            </Link>
           </div>
         </div>
+
+        {/* Flexible spacer to ensure content stays up and image remains visible in viewport */}
+        <div className="relative z-0 flex-1 w-full pointer-events-none"></div>
       </section>
 
       {/* Stats Counter Bar */}
@@ -177,7 +200,7 @@ export default function Landing() {
                 <div className="relative z-10 p-3 rounded-xl bg-[#F1F8F1] text-[#2E7D32] w-fit mb-5 group-hover:bg-[#2E7D32] group-hover:text-white transition-colors duration-300 shadow-sm border border-[#2E7D32]/10">
                   <f.icon className="w-6 h-6" />
                 </div>
-                <h3 className="relative z-10 font-heading font-extrabold text-[#1e293b] text-lg mb-2 tracking-tight">{f.title}</h3>
+                <h3 className="relative z-10 font-display font-bold text-[#1e293b] text-lg mb-2 tracking-tight">{f.title}</h3>
                 <p className="relative z-10 text-[13px] text-slate-500 font-medium leading-relaxed">{f.desc}</p>
               </div>
             ))}
@@ -186,8 +209,8 @@ export default function Landing() {
       </section>
 
       {/* Circulars & Image Split Section */}
-      <section className="bg-white border-b border-slate-100 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <section id="scheme" className="bg-white border-b border-slate-100 overflow-hidden relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center lg:items-stretch">
             
             {/* Left Side: Image Collage */}
@@ -200,7 +223,7 @@ export default function Landing() {
                 {/* Main Image Card */}
                 <div className="absolute top-4 right-4 left-12 bottom-20 rounded-3xl overflow-hidden shadow-2xl border-4 border-white z-10 hover:-translate-y-2 transition-transform duration-500 group bg-slate-100">
                   <div className="absolute inset-0 bg-gradient-to-tr from-[#2E7D32]/20 to-transparent z-10 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-500"></div>
-                  <img src={heroBg} alt="Delhi EV Infrastructure" className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" />
+                  <img src={delhiEvVector} alt="Delhi EV Infrastructure Vector Illustration" className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" />
                   
                   {/* Floating Badge (Pill Style) */}
                   <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-full shadow-lg border border-[#2E7D32]/10 flex items-center gap-2.5 z-20 hover:scale-105 transition-transform duration-300">
@@ -297,30 +320,38 @@ export default function Landing() {
       </section>
 
       {/* How It Works */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 border-t border-border">
-        <h2 className="font-heading text-2xl md:text-3xl font-bold text-center mb-16 text-[#2E7D32]">How It Works</h2>
-        <div className="relative flex flex-col md:flex-row justify-between items-center gap-12 md:gap-4">
-          <div className="hidden md:block absolute top-[50px] left-[15%] right-[15%] h-0.5 border-t-4 border-dashed border-[#2E7D32]/20 z-0"></div>
-          
-          {[
-            { step: 'Step 1', title: 'Apply for License', desc: 'upload docs online', icon: FileText },
-            { step: 'Step 2', title: 'Declare Your Fleet', desc: 'add vehicles fortnightly', icon: Car },
-            { step: 'Step 3', title: 'Track EV Compliance', desc: 'meet phased targets', icon: Target }
-          ].map((item, i) => (
-            <div key={item.step} className="relative z-10 flex flex-col items-center text-center w-full md:w-1/3">
-              <div className="w-24 h-24 rounded-full bg-[#F1F8F1] border-[6px] border-white shadow-xl flex items-center justify-center mb-6 text-[#2E7D32] hover:scale-105 transition-transform duration-300">
-                <item.icon className="w-10 h-10" />
+      <section id="how-it-works" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 border-t border-slate-100">
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex items-center justify-center gap-2 mb-16">
+            <span className="text-xl">🌿</span>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold text-center text-[#2E7D32]">How It Works</h2>
+            <span className="text-xl">🌿</span>
+          </div>
+
+          <div className="relative flex flex-col md:flex-row justify-between items-center gap-12 md:gap-4">
+            <div className="hidden md:block absolute top-[50px] left-[15%] right-[15%] h-0.5 border-t-4 border-dashed border-[#2E7D32]/20 z-0"></div>
+            
+            {[
+              { step: 'Step 1', title: 'Apply for License', desc: 'Upload docs online', icon: FileText },
+              { step: 'Step 2', title: 'Declare Your Fleet', desc: 'Add vehicles fortnightly', icon: Car },
+              { step: 'Step 3', title: 'Track EV Compliance', desc: 'Meet phased targets', icon: Target }
+            ].map((item) => (
+              <div key={item.step} className="relative z-10 flex flex-col items-center text-center w-full md:w-1/3">
+                <div className="w-24 h-24 rounded-full bg-[#F1F8F1] border-[6px] border-white shadow-xl flex items-center justify-center mb-6 text-[#2E7D32] hover:scale-105 transition-transform duration-300">
+                  <item.icon className="w-10 h-10" />
+                </div>
+                <div className="px-4 py-1 rounded-full bg-[#FFC107] text-amber-950 font-bold text-xs mb-3 shadow-md">{item.step}</div>
+                <h3 className="font-display font-bold text-xl mb-2 text-slate-800">{item.title}</h3>
+                <p className="text-sm text-slate-500 font-medium">{item.desc}</p>
               </div>
-              <div className="px-4 py-1 rounded-full bg-[#FFC107] text-amber-950 font-bold text-xs mb-3 shadow-md">{item.step}</div>
-              <h3 className="font-heading font-bold text-xl mb-2 text-slate-800">{item.title}</h3>
-              <p className="text-sm text-slate-500 font-medium">{item.desc}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* EV Adoption Timeline - Premium Grid Design */}
-      <section className="bg-slate-50/70 py-24 border-y border-slate-100">
+      <section id="ev-targets" className="bg-slate-50/70 py-24 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-[#2E7D32] mb-4">EV Target Milestones</h2>
@@ -372,7 +403,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
           <div className="text-center mb-16">
             <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-[#2E7D32] mb-4">Why Go Electric?</h2>
-            <p className="text-slate-500 font-medium max-w-2xl mx-auto">Exclusive benefits designed to accelerate the transition to zero-emission mobility.</p>
+            <p className="text-[#2E7D32]/70 font-medium max-w-2xl mx-auto">Exclusive benefits designed to accelerate the transition to zero-emission mobility.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -381,11 +412,14 @@ export default function Landing() {
               { title: 'Cleaner Delhi', desc: 'Contribute to NCT\'s 2030 zero-emission goals and reduce pollution', icon: Leaf, bg: 'bg-[#F1F8F1]', color: 'text-[#2E7D32]' }
             ].map((card) => (
               <div key={card.title} className={`${card.bg} p-8 rounded-[32px] flex flex-col items-center text-center shadow-lg shadow-slate-200/70 hover:shadow-2xl hover:shadow-[#2E7D32]/15 transition-all duration-300 hover:-translate-y-2 border-[5px] border-white group relative overflow-hidden`}>
+                
                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/50 rounded-bl-full -mr-8 -mt-8 pointer-events-none group-hover:scale-110 transition-transform" />
-                <div className={`w-20 h-20 rounded-2xl bg-white flex flex-shrink-0 items-center justify-center mb-8 shadow-md border border-[#2E7D32]/10 group-hover:rotate-6 group-hover:scale-110 transition-all duration-300 ${card.color} relative z-10`}>
+                
+                <div className={`w-20 h-20 rounded-2xl bg-white flex flex-shrink-0 items-center justify-center mb-8 shadow-md border border-[#2E7D32]/10 group-hover:rotate-6 group-hover:scale-110 transition-all duration-300 ${card.color} relative z-10 mt-2`}>
                   <card.icon className="w-10 h-10" />
                 </div>
-                <h3 className="font-heading font-extrabold tracking-tight text-xl mb-3 text-slate-800 relative z-10">{card.title}</h3>
+                
+                <h3 className="font-display font-bold tracking-tight text-xl mb-3 text-slate-800 relative z-10">{card.title}</h3>
                 <p className="text-slate-600 leading-relaxed text-[15px] font-medium relative z-10">{card.desc}</p>
               </div>
             ))}
@@ -394,11 +428,8 @@ export default function Landing() {
       </section>
 
       {/* FAQ Section */}
-      <section className="relative bg-white overflow-hidden pt-16 md:pt-24 pb-32">
-        <div className="absolute bottom-0 w-full h-[400px] opacity-70 pointer-events-none">
-          <FAQIllustration className="w-full h-full object-cover object-bottom" />
-        </div>
-        <div className="relative bg-white/70 backdrop-blur-[2px] w-full pt-4 pb-20">
+      <section id="faq" className="relative bg-white overflow-hidden pt-16 md:pt-24 pb-24">
+        <div className="relative bg-white w-full">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 z-10 relative">
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-center mb-12 text-[#2E7D32]">Frequently Asked Questions</h2>
             <div className="space-y-4">
@@ -422,14 +453,168 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-primary text-primary-foreground/60 text-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row justify-between gap-4">
-          <p>© 2026 Transport Department, Government of NCT of Delhi. All rights reserved.</p>
-          <div className="flex gap-6">
-            <span className="cursor-pointer hover:text-white">Terms of Use</span>
-            <span className="cursor-pointer hover:text-white">Privacy Policy</span>
-            <span className="cursor-pointer hover:text-white">Accessibility</span>
+      {/* Main Innovative Footer */}
+      <footer className="bg-[#062417] text-slate-300 relative overflow-hidden border-t border-emerald-900/40">
+        {/* Background Subtle Grid & Accent Light */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none" />
+
+        {/* Top Footer Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12 pb-12 border-b border-emerald-900/50">
+            
+            {/* Brand Column (Spans 2 cols on lg) */}
+            <div className="lg:col-span-2 space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#10a352] to-[#0d5c3a] flex items-center justify-center text-white shadow-md shadow-emerald-950/50 border border-emerald-400/20">
+                  <Shield className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="font-display font-bold text-lg text-white tracking-tight block leading-tight">
+                    Delhi Aggregator Portal
+                  </span>
+                  <span className="text-[11px] text-emerald-400/90 font-medium tracking-wide block uppercase">
+                    Transport Dept · Govt of NCT of Delhi
+                  </span>
+                </div>
+              </div>
+
+              <p className="text-xs md:text-sm text-slate-400 leading-relaxed max-w-sm">
+                The single-window digital governance portal for onboarding, fleet electrification monitoring, and license compliance for ride-hailing and delivery service providers.
+              </p>
+
+              {/* Realtime Operational Status Badge */}
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-800/50 text-emerald-300 text-xs font-semibold">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span>System Operational · 100% Uptime</span>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h3 className="font-display font-bold text-sm text-white uppercase tracking-wider mb-4 text-emerald-400/90">
+                Portals & Services
+              </h3>
+              <ul className="space-y-2.5 text-xs md:text-sm">
+                <li>
+                  <Link to="/register" className="hover:text-emerald-400 transition-colors">
+                    Aggregator Onboarding
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/login" className="hover:text-emerald-400 transition-colors">
+                    Fleet Declaration
+                  </Link>
+                </li>
+                <li>
+                  <a href="#ev-targets" className="hover:text-emerald-400 transition-colors">
+                    EV Target Calculator
+                  </a>
+                </li>
+                <li>
+                  <a href="#scheme" className="hover:text-emerald-400 transition-colors">
+                    Bank Guarantee Format
+                  </a>
+                </li>
+                <li>
+                  <Link to="/login" className="hover:text-emerald-400 transition-colors">
+                    Public Grievance Portal
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Policy & Guidelines */}
+            <div>
+              <h3 className="font-display font-bold text-sm text-white uppercase tracking-wider mb-4 text-emerald-400/90">
+                Guidelines
+              </h3>
+              <ul className="space-y-2.5 text-xs md:text-sm">
+                <li>
+                  <a href="#scheme" className="hover:text-emerald-400 transition-colors">
+                    Delhi Policy Gazette 2023
+                  </a>
+                </li>
+                <li>
+                  <a href="#faq" className="hover:text-emerald-400 transition-colors">
+                    EV Charging Grid
+                  </a>
+                </li>
+                <li>
+                  <a href="#faq" className="hover:text-emerald-400 transition-colors">
+                    Fee Exemption Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="#scheme" className="hover:text-emerald-400 transition-colors">
+                    Circulars & Orders
+                  </a>
+                </li>
+                <li>
+                  <a href="#faq" className="hover:text-emerald-400 transition-colors">
+                    Help & FAQs
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Helpdesk & Contact */}
+            <div>
+              <h3 className="font-display font-bold text-sm text-white uppercase tracking-wider mb-4 text-emerald-400/90">
+                Helpdesk & Support
+              </h3>
+              <div className="space-y-3 text-xs md:text-sm">
+                <div className="flex items-start gap-2.5">
+                  <Phone className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="block text-slate-400 text-[11px]">Toll-Free Helpline</span>
+                    <span className="text-white font-bold">1800-11-3854</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <Mail className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="block text-slate-400 text-[11px]">Official Support Email</span>
+                    <span className="text-white font-medium text-xs break-all">aggregator-ev@delhi.gov.in</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <MapPin className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="block text-slate-400 text-[11px]">Headquarters</span>
+                    <span className="text-slate-300 text-xs">5/9 Under Hill Rd, Transport Dept, Rajpur Rd, Delhi 110054</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom Copyright & Legal Line */}
+          <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+            <div className="text-center md:text-left space-y-1">
+              <p>© 2026 Transport Department, Government of NCT of Delhi. All rights reserved.</p>
+              <p className="text-[11px] text-slate-500">Designed & Maintained for Delhi EV Aggregator Compliance Scheme.</p>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-5 text-[12px]">
+              <span className="hover:text-emerald-400 cursor-pointer transition-colors">Privacy Policy</span>
+              <span className="hover:text-emerald-400 cursor-pointer transition-colors">Terms of Service</span>
+              <span className="hover:text-emerald-400 cursor-pointer transition-colors">Hyperlinking Policy</span>
+              <span className="hover:text-emerald-400 cursor-pointer transition-colors">Disclaimer</span>
+              <button 
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 border border-emerald-700/50 transition-all font-semibold"
+              >
+                <span>Top</span>
+                <ChevronUp className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
         </div>
       </footer>

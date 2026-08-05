@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Space+Grotesk:wght@300..700&family=Syne:wght@400..800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,9 @@
 @layer base {
   :root {
     --font-heading: 'Syne', sans-serif;
+    --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
     --font-body: 'DM Sans', sans-serif;
+    --font-subheading: 'IBM Plex Sans', sans-serif;
 
     --background: 220 14% 97%;
     --foreground: 220 40% 10%;
@@ -69,7 +71,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+    font-family: var(--font-display);
   }
 }
 
@@ -77,8 +79,14 @@
   .font-heading {
     font-family: var(--font-heading);
   }
+  .font-display {
+    font-family: var(--font-display);
+  }
   .font-body {
     font-family: var(--font-body);
+  }
+  .font-subheading {
+    font-family: var(--font-subheading);
   }
   .glass {
     @apply bg-card/90 border border-border/50;

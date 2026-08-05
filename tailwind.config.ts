@@ -13,7 +13,9 @@ export default {
     extend: {
       fontFamily: {
         heading: ["Syne", "sans-serif"],
+        display: ["Space Grotesk", "ui-sans-serif", "system-ui", "sans-serif"],
         body: ["DM Sans", "sans-serif"],
+        subheading: ["IBM Plex Sans", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
